@@ -10,6 +10,13 @@ const game = {
     }
   }
 
+function getGuess() {
+    console.log(getGuess)
+}
+
+result = window.prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`); // Step 2
+
+
 //   Completing the following tasks will result in a working *Guess the Number* game:
 
 //   1. Add a `prevGuesses` property to the `game` object initialized to an empty array.
@@ -30,3 +37,6 @@ const game = {
 //           - Template literals not only have interpolation, but they also honor whitespace - including line breaks!
 //           - The list of previous guesses can be generated using the array `join` method.
 //   6. The `play` method should end (`return`) when the guess matches `secretNum`.
+
+
+`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`
