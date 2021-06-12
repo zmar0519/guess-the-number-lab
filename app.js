@@ -7,14 +7,34 @@ const game = {
     play: function() {
       this.secretNum = Math.floor(Math.random() * 
         (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
+    },
+
+    getGuess: function () {
+        let input;
+        input = window.prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`) // Step 2
+        if (!isNumeric (input)){
+            alert ('Please enter a number')
+        }
+        if (input > this.secretNum){
+            alert ('Too high')
+        } else if (input < this.secretNum){
+            alert ('Too low')
+        } else { alert ('WINNER')
+        }
+
     }
+ }
+ 
+    game.getGuess ()
+
+
+// REF: https://stackoverflow.com/questions/175739/built-in-way-in-javascript-to-check-if-a-string-is-a-valid-number
+function isNumeric(str) {
+    if (typeof str != "string") return false // we only process strings!  
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+           !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail        
   }
 
-function getGuess() {
-    console.log(getGuess)
-}
-
-result = window.prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`); // Step 2
 
 
 //   Completing the following tasks will result in a working *Guess the Number* game:
@@ -40,3 +60,6 @@ result = window.prompt(`Enter a guess between ${this.smallestNum} and ${this.big
 
 
 `Enter a guess between ${this.smallestNum} and ${this.biggestNum}`
+
+
+console.log(game)
