@@ -6,16 +6,18 @@ const game = {
     prevGuesses: [], //Step 1
     getGuess: function () {
         let input;
-        input = window.prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`) // Step 2
-        if (!isNumeric (input)){
-            alert ('Please enter a number')
-        }
-        input = parseInt(input) 
-        if (input < this.smallestNum) {
-            alert ('Please enter a number greater than or qual to ' + this.smallestNum)
-        } else if (input > this.biggestNum) {
-            alert ('Please enter a number less than or eqial to ' + this.biggestNum)
-        }
+        
+        
+        do {
+            input = parseInt(window.prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
+        } while (isNaN (input) || input < this.smallestNum || input > this.biggestNum)
+        
+        // if (input < this.smallestNum) {
+        //     alert ('Please enter a number greater than or qual to ' + this.smallestNum)
+        // } else if (input > this.biggestNum) {
+        //     alert ('Please enter a number less than or eqial to ' + this.biggestNum)
+        // }
+
         if (input > this.secretNum){
             alert ('Too high')
         } else if (input < this.secretNum){
@@ -26,6 +28,8 @@ const game = {
         return input
     },
     
+
+
     play: function() {
         this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
         console.log(this.secretNum) // Move back to the end of play: function at end!!!
@@ -33,6 +37,8 @@ const game = {
         do {
             userGuess = (this.getGuess ())
             console.log(userGuess)
+            this.prevGuesses.push (userGuess)
+            console.log(this.prevGuesses)
         } while (userGuess !== this.secretNum);
 
 
@@ -44,15 +50,6 @@ const game = {
 }
 
 game.play ()
-
-
-// REF: https://stackoverflow.com/questions/175739/built-in-way-in-javascript-to-check-if-a-string-is-a-valid-number
-
-function isNumeric(str) {
-    if (typeof str != "string") return false // we only process strings!  
-    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
-           !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail      
-  }
 
 
 
