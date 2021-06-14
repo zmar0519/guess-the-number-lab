@@ -11,23 +11,19 @@ const game = {
         do {
             input = parseInt(window.prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}`))
         } while (isNaN (input) || input < this.smallestNum || input > this.biggestNum)
-        
-        // if (input < this.smallestNum) {
-        //     alert ('Please enter a number greater than or qual to ' + this.smallestNum)
-        // } else if (input > this.biggestNum) {
-        //     alert ('Please enter a number less than or eqial to ' + this.biggestNum)
-        // }
 
-        if (input > this.secretNum){
-            alert ('Too high')
-        } else if (input < this.secretNum){
-            alert ('Too low')
-        } else { 
-            alert ('WINNER')
-        } 
         return input
     },
     
+    render: function (input) {
+        const highOrLow = input < this.secretNum ? 'too low':'too high'
+
+        if (input === parseInt(this.secretNum)){
+            alert (`You won in ${this.prevGuesses.length} guesses!`)
+        } else { 
+            alert (`You're guess is ${highOrLow} . Previous guesses:${this.prevGuesses.join(', ')}`)
+        }
+    },
 
 
     play: function() {
@@ -38,6 +34,9 @@ const game = {
             userGuess = (this.getGuess ())
             console.log(userGuess)
             this.prevGuesses.push (userGuess)
+
+            this.render(userGuess)
+
             console.log(this.prevGuesses)
         } while (userGuess !== this.secretNum);
 
